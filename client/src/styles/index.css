@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* LuxuryStay design tokens: use like bg-navy, text-gold, font-display */
+@theme {
+  --color-ivory: #F7F3EA;
+  --color-navy: #141B2D;
+  --color-navy-soft: #2A3350;
+  --color-gold: #C9A24D;
+  --color-gold-dark: #8A6A1F;
+  --color-ink: #1B2236;
+  --color-muted: #6B6455;
+  --color-line: #E8E0CC;
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+body {
+  @apply bg-ivory text-ink font-sans antialiased;
+}
+
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Smooth premium feel */
+html { scroll-behavior: smooth; }
+::selection { background: #C9A24D; color: #141B2D; }
+:focus-visible { outline: 2px solid #C9A24D; outline-offset: 2px; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #C9B98F; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Printing an invoice: only the invoice shows */
+@media print {
+  @page { size: A4; margin: 10mm; }
+  body { background: #fff; }
+  .no-print, aside, nav, footer.site, header.site { display: none !important; }
+  main { padding: 0 !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ===================== Dark mode ===================== */
+/* Theme colours are CSS variables, so changing them here re-colours the whole app */
+html.dark {
+  color-scheme: dark;
+  --color-ivory: #0D1220;
+  --color-line: #2A3350;
+  --color-ink: #E8E2D4;
+  --color-muted: #A3AABF;
+  --color-gold-dark: #E0BE6E;
+}
+html.dark body { background: #0D1220; }
+html.dark .bg-white, html.dark [class*="bg-white/9"], html.dark [class*="bg-white/8"] { background-color: #161D30; }
+html.dark .from-\[\#F7F3EA\] { --tw-gradient-from: #1B2338; }
+html.dark .to-\[\#E8E0CC\] { --tw-gradient-to: #0D1220; }
+html.dark .text-navy { color: #F1E6C8; }
+html.dark .bg-navy .text-navy, html.dark .bg-gold, html.dark .bg-gold *, html.dark .bg-gold.text-navy { color: #141B2D; }
+html.dark .bg-navy { background-color: #0A0F1C; }
+html.dark .border-navy { border-color: #C9A24D; }
+html.dark button.bg-navy, html.dark a.bg-navy { background-color: #C9A24D; color: #141B2D; }
+html.dark [class*="text-[#4A4538]"] { color: #C7CBD8; }
+html.dark [class*="bg-[#FBF8F1]"], html.dark [class*="bg-[#F0EADB]"] { background-color: #1B2338; }
+html.dark [class*="border-[#F0EADB]"] { border-color: #2A3350; }
+html.dark [class*="bg-[radial-gradient"] { background: #0D1220 !important; }
+html.dark .recharts-cartesian-grid line { stroke: #2A3350; }
+html.dark .recharts-text { fill: #A3AABF; }
+html.dark .recharts-area-curve { stroke: #C9A24D; }
+html.dark .recharts-area-area { fill: #C9A24D; }
+html.dark .recharts-bar-rectangle path[fill="#141B2D"] { fill: #6E86C9; }
+html.dark .recharts-legend-item-text { color: #C7CBD8 !important; }
+html.dark .recharts-default-tooltip { background: #161D30 !important; border-color: #2A3350 !important; }
+html.dark img { filter: brightness(0.92); }
+/* The invoice always stays like paper (white), even in dark mode */
+html.dark #invoice { --color-ink: #1B2236; --color-muted: #6B6455; --color-line: #E8E0CC; --color-ivory: #F7F3EA; --color-gold-dark: #8A6A1F; background: #fff; color: #1B2236; }
+html.dark #invoice .text-navy { color: #141B2D; }
+html.dark #invoice .bg-white { background: #fff; }
+html.dark #invoice [class*="bg-[#FBF8F1]"] { background-color: #FBF8F1; }
+
+/* ===================== Urdu (right to left) ===================== */
+html[lang="ur"] body { font-family: "Noto Nastaliq Urdu", "Inter", sans-serif; }
+html[lang="ur"] .font-display { font-family: "Cormorant Garamond", "Noto Nastaliq Urdu", serif; line-height: 1.6; }
+html[lang="ur"] nav a, html[lang="ur"] nav span, html[lang="ur"] label { line-height: 2.1; }

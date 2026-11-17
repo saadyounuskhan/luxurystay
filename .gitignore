@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.env.local
+server/uploads
+server/logs
+server/backups
+client/gen
